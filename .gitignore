@@ -1,0 +1,9 @@
+*.iml
+*.idea
+
+__pycache__
+*.pyc
+
+*.txt
+*.csv
+*.json
