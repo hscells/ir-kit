@@ -104,4 +104,4 @@ def load(qrels: io.IOBase) -> Qrels:
     :param qrels: File pointer
     :return: Qrels object
     """
-    return loads('\n'.join(qrels.readlines()))
+    return loads(os.linesep.join(qrels.readlines()))
