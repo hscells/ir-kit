@@ -69,7 +69,7 @@ def loads(trec_results: str) -> TrecEvalResults:
     queries = {}
 
     for line in trec_results.split(os.linesep):
-        if line.isspace():
+        if not line.strip():
             continue
         field, query, value = line.split()
         if query == 'all':  # accumulated results over all queries
@@ -80,7 +80,7 @@ def loads(trec_results: str) -> TrecEvalResults:
         else:
             if query not in queries:
                 queries[query] = {}
-            queries[field] = value
+            queries[query][field] = float(value)
 
     return TrecEvalResults(run_id, results, queries)
 

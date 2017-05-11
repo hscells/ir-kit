@@ -5,23 +5,29 @@ Harry Scells
 Mar 2017
 """
 
+import argparse
 import re
-from typing import List
 
 import numpy as np
-from matplotlib.pyplot import plot as plt
+import matplotlib.pyplot as plt
+from typing import List
 
-from irkit.io.trec_eval_results import TrecEvalResults
+try:
+    from trec import trec_eval_results
+    from trec.trec_eval_results import TrecEvalResults
+except ImportError:
+    from irkit.trec import trec_eval_results
+    from irkit.trec.trec_eval_results import TrecEvalResults
 
 
-def pr_curve(results: List(TrecEvalResults)) -> plt:
+def pr_curve(results: List[TrecEvalResults]) -> plt:
     """
     Create a precision-recall graph from trec_eval results.
     :param results: A list of TrecEvalResults files
     :return: a matplotlib plt object
     """
 
-    names = [r.runid for r in results]
+    names = [r.run_id for r in results]
     iprec = [[r.results['iprec_at_recall_0.00'],
               r.results['iprec_at_recall_0.10'],
               r.results['iprec_at_recall_0.20'],
@@ -46,7 +52,7 @@ def pr_curve(results: List(TrecEvalResults)) -> plt:
     return plt
 
 
-def topic_ap(results: List(TrecEvalResults), sort_on_ap=False):
+def topic_ap(results: List[TrecEvalResults], sort_on_ap=False):
     """
 
     :param results:
@@ -118,3 +124,15 @@ def topic_ap(results: List(TrecEvalResults), sort_on_ap=False):
         return plot(ap, ylabel, topic_names, sort_on_ap)
     else:
         raise Exception('Can only plot either one or two TrecEvalResults objects.')
+
+
+if __name__ == '__main__':
+    argparser = argparse.ArgumentParser()
+
+    argparser.add_argument('--trec_results', help='trec_eval results files',
+                           required=True, type=argparse.FileType('r'), nargs='+')
+
+    args = argparser.parse_args()
+
+    pr_curve([trec_eval_results.load(f) for f in args.trec_results]).savefig('output',
+                                                                             bbox_inches='tight')
