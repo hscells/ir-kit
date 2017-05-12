@@ -15,5 +15,5 @@ class TrecEvalRun(object):
         self.run_id = run_id
 
     def __str__(self):
-        return '{}\t{}\t{}\t{}\t{}'.format(self.topic, self.doc_id, self.rank, self.score,
-                                           self.run_id)
+        return '{}\t{}\t{}\t{}\t{}\t{}'.format(self.topic, self.q, self.doc_id, self.rank,
+                                               self.score, self.run_id)
