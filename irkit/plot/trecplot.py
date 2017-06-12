@@ -12,6 +12,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from typing import List
 
+from irkit.trec.results import TrecEvalResults
+
 # This causes matplotlib to use Type 42 (a.k.a. TrueType) fonts for PostScript and PDF files.
 # This allows you to avoid Type 3 fonts without limiting yourself to the stone-age technology
 # of Type 1 fonts.
@@ -22,8 +24,6 @@ plt.style.use('grayscale')
 plt.style.use('seaborn-poster')
 plt.style.use('seaborn-white')
 
-from trec import results
-from trec.results import TrecEvalResults
 
 def pr_curve(results: List[TrecEvalResults]) -> plt:
     """

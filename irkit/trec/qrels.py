@@ -15,6 +15,7 @@ Mar 2017
 """
 
 import io
+
 import os
 from typing import List
 

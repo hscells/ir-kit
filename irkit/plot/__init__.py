@@ -1,8 +1,8 @@
 import argparse
 
-import trec.results
-from plot import trecplot
-from plot.trecplot import pr_curve
+from irkit.plot.trecplot import pr_curve
+
+import irkit.trec.results
 
 
 def main():
@@ -14,5 +14,5 @@ def main():
                            default='output', required=False)
 
     args = argparser.parse_args()
-    pr_curve([trec.results.load(f) for f in args.trec_results]).savefig('output',
-                                                                        bbox_inches='tight')
+    pr_curve([irkit.trec.results.load(f) for f in args.trec_results]).savefig('output',
+                                                                              bbox_inches='tight')
