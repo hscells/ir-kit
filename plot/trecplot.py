@@ -5,18 +5,30 @@ Harry Scells
 Mar 2017
 """
 
-import argparse
 import re
 
-import numpy as np
+import matplotlib as mpl
 import matplotlib.pyplot as plt
+import numpy as np
 from typing import List
+
+# This causes matplotlib to use Type 42 (a.k.a. TrueType) fonts for PostScript and PDF files.
+# This allows you to avoid Type 3 fonts without limiting yourself to the stone-age technology
+# of Type 1 fonts.
+mpl.rcParams['pdf.fonttype'] = 42
+mpl.rcParams['ps.fonttype'] = 42
+
+plt.style.use('grayscale')
+plt.style.use('seaborn-poster')
+plt.style.use('seaborn-white')
 
 try:
     from trec import trec_eval_results
     from trec.trec_eval_results import TrecEvalResults
 except ImportError:
+    # noinspection PyUnresolvedReferences
     from irkit.trec import trec_eval_results
+    # noinspection PyUnresolvedReferences
     from irkit.trec.trec_eval_results import TrecEvalResults
 
 
@@ -42,13 +54,16 @@ def pr_curve(results: List[TrecEvalResults]) -> plt:
 
     recall = np.arange(0, 1.1, 0.1)
 
-    plt.xlabel('Recall')
-    plt.ylabel('Interpolated Precision')
+    mpl.rc('xtick', labelsize=35)
+    mpl.rc('ytick', labelsize=35)
+
+    plt.xlabel('Recall', fontsize=35)
+    plt.ylabel('Interpolated Precision', fontsize=35)
 
     for p in iprec:
-        plt.plot(recall, p)
+        plt.plot(recall, p, linewidth=10)
 
-    plt.legend(names)
+    plt.legend(names, fontsize=35)
     return plt
 
 
@@ -97,7 +112,6 @@ def topic_ap(results: List[TrecEvalResults], sort_on_ap=False):
         plt.ylabel(ylabel)
         plt.xlabel('Topic')
 
-        # plt.savefig(outfile, bbox_inches='tight')
         return plt
 
     if len(results) == 2:
@@ -124,15 +138,3 @@ def topic_ap(results: List[TrecEvalResults], sort_on_ap=False):
         return plot(ap, ylabel, topic_names, sort_on_ap)
     else:
         raise Exception('Can only plot either one or two TrecEvalResults objects.')
-
-
-if __name__ == '__main__':
-    argparser = argparse.ArgumentParser()
-
-    argparser.add_argument('--trec_results', help='trec_eval results files',
-                           required=True, type=argparse.FileType('r'), nargs='+')
-
-    args = argparser.parse_args()
-
-    pr_curve([trec_eval_results.load(f) for f in args.trec_results]).savefig('output',
-                                                                             bbox_inches='tight')
