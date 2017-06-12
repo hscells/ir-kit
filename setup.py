@@ -28,7 +28,7 @@ setup(
     long_description=long_description,
 
     # The project's main homepage.
-    url='https://github.com/hscells/irkit',
+    url='https://github.com/hscells/ir-kit',
 
     # Author details
     author='Harry Scells',
