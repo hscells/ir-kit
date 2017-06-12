@@ -22,15 +22,8 @@ plt.style.use('grayscale')
 plt.style.use('seaborn-poster')
 plt.style.use('seaborn-white')
 
-try:
-    from trec import trec_eval_results
-    from trec.trec_eval_results import TrecEvalResults
-except ImportError:
-    # noinspection PyUnresolvedReferences
-    from irkit.trec import trec_eval_results
-    # noinspection PyUnresolvedReferences
-    from irkit.trec.trec_eval_results import TrecEvalResults
-
+from trec import results
+from trec.results import TrecEvalResults
 
 def pr_curve(results: List[TrecEvalResults]) -> plt:
     """
