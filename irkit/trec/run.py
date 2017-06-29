@@ -39,6 +39,7 @@ class TrecEvalRuns(object):
     def __getattr__(self, field):
         """
         Access a column of the runs by accessing the fields in a run.
+        
         :param field: One of the attributes (fields) of the qrel
         :return: The column for the field (i.e. only the topics, or only the document_num)
         """
@@ -53,6 +54,7 @@ class TrecEvalRuns(object):
     def __getitem__(self, topic):
         """
         Allow runs to be indexed by topic id.
+        
         :param topic: The topic
         :return: The rows of this topic
         """
@@ -64,6 +66,7 @@ class TrecEvalRuns(object):
     def dumps(self):
         """
         Dump the qrels to a string.
+        
         :return: Formatted qrels
         """
         return str(self)
@@ -71,6 +74,7 @@ class TrecEvalRuns(object):
     def dump(self, fp: io.TextIOWrapper):
         """
         Dump the qrels to a file
+        
         :param fp: A File pointer
         """
         fp.writelines(self.dumps())
@@ -79,6 +83,7 @@ class TrecEvalRuns(object):
 def loads(runs: str) -> TrecEvalRuns:
     """
     Load a trec_eval run file from a string.
+    
     :param runs: A string containing runs.
     :return: TrecEvalRuns
     """
@@ -93,6 +98,8 @@ def loads(runs: str) -> TrecEvalRuns:
 def load(runs: io.TextIOWrapper) -> TrecEvalRuns:
     """
     Load a trec_eval run file.
+    
     :param runs: A file pointer containing runs.
     :return: TrecEvalRuns
     """
+    return loads(runs.read())

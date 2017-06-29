@@ -48,6 +48,7 @@ class Qrels:
     def __getattr__(self, field):
         """
         Access a column of the qrels by accessing the fields in a Qrel.
+        
         :param field: One of the attributes (fields) of the qrel
         :return: The column for the field (i.e. only the topics, or only the document_num)
         """
@@ -62,6 +63,7 @@ class Qrels:
     def __getitem__(self, topic):
         """
         Allow qrels to be indexed by topic id.
+        
         :param topic: The topic
         :return: The rows of this topic
         """
@@ -73,6 +75,7 @@ class Qrels:
     def dumps(self):
         """
         Dump the qrels to a string.
+        
         :return: Formatted qrels
         """
         return str(self)
@@ -80,6 +83,7 @@ class Qrels:
     def dump(self, fp: io.TextIOWrapper):
         """
         Dump the qrels to a file
+        
         :param fp: A File pointer
         """
         fp.writelines(self.dumps())
@@ -88,6 +92,7 @@ class Qrels:
 def loads(qrels: str) -> Qrels:
     """
     Load qrels from a string.
+    
     :param qrels: Some string representation of qrels
     :return: Qrels object
     """
@@ -102,6 +107,7 @@ def loads(qrels: str) -> Qrels:
 def load(qrels: io.TextIOWrapper) -> Qrels:
     """
     Load qrels from a file.
+    
     :param qrels: File pointer
     :return: Qrels object
     """

@@ -52,6 +52,7 @@ class TrecEvalResults:
     def __getitem__(self, query):
         """
         Allow trec results to be indexed by query num.
+        
         :param query: The query to search
         :return: The rows of this topic
         """
@@ -61,6 +62,7 @@ class TrecEvalResults:
 def loads(trec_results: str) -> TrecEvalResults:
     """
     Load trec_eval results from a string.
+    
     :param trec_results: Some string representation of trec results
     :return: TrecEvalResults object
     """
@@ -88,6 +90,7 @@ def loads(trec_results: str) -> TrecEvalResults:
 def load(trec_result_file: io.TextIOWrapper) -> TrecEvalResults:
     """
     Load trec_eval results from a file.
+    
     :param trec_result_file: File pointer
     :return: Qrels object
     """
