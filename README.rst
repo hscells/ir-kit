@@ -24,8 +24,4 @@ Libraries
 ^^^^^^^^^
 
 Dealing with trec-related files is done using the ``trec`` package. This package contains classes for dealing with qrel
-files, trec run files, and trec result files. For documentation of these packages, use ``pydoc3``. For example:
-
-::
-
-    pydoc3 irkit.trec.qrels
+files, trec run files, and trec result files.
