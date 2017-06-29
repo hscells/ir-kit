@@ -1,6 +1,10 @@
 IR Kit
 ======
 
+.. image:: http://readthedocs.org/projects/ir-kit/badge/?version=latest
+:target: http://ir-kit.readthedocs.io/en/latest/?badge=latest
+:alt: Documentation Status
+
 Information Retrieval Kit - Utilities for IR in python
 
 Installing
