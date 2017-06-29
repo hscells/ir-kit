@@ -77,7 +77,7 @@ class Qrels:
         """
         return str(self)
 
-    def dump(self, fp: io.IOBase):
+    def dump(self, fp: io.TextIOWrapper):
         """
         Dump the qrels to a file
         :param fp: A File pointer
@@ -99,7 +99,7 @@ def loads(qrels: str) -> Qrels:
     return Qrels(data)
 
 
-def load(qrels: io.IOBase) -> Qrels:
+def load(qrels: io.TextIOWrapper) -> Qrels:
     """
     Load qrels from a file.
     :param qrels: File pointer

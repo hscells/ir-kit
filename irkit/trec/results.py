@@ -85,7 +85,7 @@ def loads(trec_results: str) -> TrecEvalResults:
     return TrecEvalResults(run_id, results, queries)
 
 
-def load(trec_result_file: io.IOBase) -> TrecEvalResults:
+def load(trec_result_file: io.TextIOWrapper) -> TrecEvalResults:
     """
     Load trec_eval results from a file.
     :param trec_result_file: File pointer
