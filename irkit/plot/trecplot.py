@@ -29,7 +29,7 @@ def pr_curve(results: List[TrecEvalResults]) -> plt:
     """
     Create a precision-recall graph from trec_eval results.
     
-    :param results: A list of TrecEvalResults files
+    :param results: A list of TrecEvalResults files.
     :return: a matplotlib plt object
     """
 
@@ -65,9 +65,9 @@ def topic_ap(results: List[TrecEvalResults], sort_on_ap=False):
     """
     Create an average-precision topic visualisation.
     
-    :param results:
-    :param sort_on_ap:
-    :return:
+    :param results: A list of TrecEvalResults files.
+    :param sort_on_ap: Should the visualisation be sorted using average precision?
+    :return: a matplotlib plt object.
     """
 
     def natural_sort(l):

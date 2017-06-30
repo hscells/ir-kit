@@ -2,11 +2,12 @@
 Functions and classes for dealing with English qrel files. The specification can be viewed at:
 http://trec.nist.gov/data/qrels_eng/
 
+Usage:
+
 >>> sample_qrels = '1 0 AP880212-0161 0\\n1 0 AP880216-0139 1\\n1 0 AP880216-0169 0'
 >>> qrels = loads(sample_qrels)
 >>> qrels.topic
 ['1', '1', '1']
-
 >>> [x.topic for x in qrels['1']]
 ['1', '1', '1']
 
@@ -72,7 +73,7 @@ class Qrels:
     def __str__(self):
         return os.linesep.join([str(x) for x in self.qrels])
 
-    def dumps(self):
+    def dumps(self) -> str:
         """
         Dump the qrels to a string.
         
@@ -80,7 +81,7 @@ class Qrels:
         """
         return str(self)
 
-    def dump(self, fp: io.TextIOWrapper):
+    def dump(self, fp: io.TextIOWrapper) -> None:
         """
         Dump the qrels to a file
         

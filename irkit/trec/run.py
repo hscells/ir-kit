@@ -1,5 +1,21 @@
 """
-Functions and classes for dealing with trec_eval run files.
+Functions and classes for dealing with trec_eval run files. For a description on how run files 
+look, see: http://faculty.washington.edu/levow/courses/ling573_SPR2011/hw/trec_eval_desc.htm
+
+Usage:
+
+>>> sample_run = '''351   0  DOC1  1   100   run-name\\n351   0  DOC2  2   50   run-name'''
+>>> runs = loads(sample_run)
+>>> runs.dumps()
+'351\tQ0\tDOC1\t1\t100\trun-name\n351\tQ0\tDOC2\t2\t50\trun-name'
+>>> [str(run) for run in runs.runs]
+['351\tQ0\tDOC1\t1\t100\trun-name', '351\tQ0\tDOC2\t2\t50\trun-name']
+>>> [str(run) for run in runs['351']]
+['351\tQ0\tDOC1\t1\t100\trun-name', '351\tQ0\tDOC2\t2\t50\trun-name']
+>>> runs.rank
+['1', '2']
+>>> TrecEvalRuns(runs['351']).rank
+['1', '2']
 
 Harry Scells
 May 2017
@@ -14,6 +30,7 @@ class TrecEvalRun(object):
     """
     TrecEvalRun is a container class for a line in a trec_eval run file.
     """
+
     def __init__(self, topic: str, q: int, doc_id: str, rank: int, score: float, run_id: str):
         self.topic = topic
         self.q = q
@@ -33,6 +50,7 @@ class TrecEvalRuns(object):
     a trec_eval run file. This class contains some convenience functions for dealing with runs, 
     such as getting a list of the runs but topic id or slicing by column.
     """
+
     def __init__(self, runs: List[TrecEvalRun]):
         self.runs = runs
 
@@ -43,13 +61,13 @@ class TrecEvalRuns(object):
         :param field: One of the attributes (fields) of the qrel
         :return: The column for the field (i.e. only the topics, or only the document_num)
         """
-        return [x.__getattribute__(field) for x in self.qrels]
+        return [x.__getattribute__(field) for x in self.runs]
 
     def __setitem__(self, key, value):
         raise Exception('Cannot set run values')
 
     def __delattr__(self, topic):
-        self.qrels = [x for x in self.qrels if x.topic != topic]
+        self.runs = [x for x in self.runs if x.topic != topic]
 
     def __getitem__(self, topic):
         """
@@ -61,9 +79,9 @@ class TrecEvalRuns(object):
         return [x for x in self.runs if x.topic == topic]
 
     def __str__(self):
-        return '\n'.join([str(run) for run in self.runs])
+        return os.linesep.join([str(run) for run in self.runs])
 
-    def dumps(self):
+    def dumps(self) -> str:
         """
         Dump the qrels to a string.
         
@@ -71,7 +89,7 @@ class TrecEvalRuns(object):
         """
         return str(self)
 
-    def dump(self, fp: io.TextIOWrapper):
+    def dump(self, fp: io.TextIOWrapper) -> None:
         """
         Dump the qrels to a file
         

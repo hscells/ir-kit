@@ -1,8 +1,7 @@
 import argparse
 
-from irkit.plot.trecplot import pr_curve
-
 import irkit.trec.results
+from irkit.plot.trecplot import pr_curve
 
 
 def main():
