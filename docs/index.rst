@@ -11,6 +11,7 @@ Welcome to ir-kit's documentation!
    :caption: Contents:
 
    trec
+   query
    plot
 
 Installing

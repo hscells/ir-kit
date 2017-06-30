@@ -29,3 +29,6 @@ Libraries
 
 Dealing with trec-related files is done using the ``trec`` package. This package contains classes for dealing with qrel
 files, trec run files, and trec result files.
+
+Additionally, the ``query`` package contains classes and functions for working with queries. Initially, there is just
+ElasticSearch, but maybe more can be added later (?).
