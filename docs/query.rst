@@ -1,7 +1,7 @@
 .. _query:
 
-Trec
-====
+Query
+=====
 
 .. automodule:: irkit.query
     :members:
